@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- title -->
+        <title>Electronics Product Review App</title>        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/favicon" href="{% static 'image/libazz-fashion-favicon.png' %}">
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- animation -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/aos.css' %}">
+        <!-- owl slider -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.default.min.css' %}">
+        <!-- font awesome -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/themify-icons.css' %}">
+        <!-- style -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles1.css' %}">
+        <!-- responsive -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    </head>
+    <body>       
+        <!-- header section start -->
+        <header class="head w-100 bg-dark-light-blue">         
+            <div class="w-100 bg-dark-light-blue" id="collapsibleNavbar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-5 d-flex align-items-center">
+                            <!-- logo start -->
+                            <div class="mainlogo">
+                                <a class="navbar-brand" href="{% url 'home' %}">
+                                    <img src="" alt="Alpha Product" class="img-fluid header-logo">
+                                </a>
+                            </div>
+                            <!-- logo end -->
+                        </div>
+                        <div class="col-xl-8 col-lg-7 col-md-4 col-1 sm-no-padding">
+                            <!-- header navbar start -->
+                            <nav class="navbar navbar-expand-lg" id="navbar">
+                                <!-- navbar toggler start -->
+                                <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1">
+                                    <span class="text-white"><i class="ti-align-justify"></i></span>
+                                </button>
+                                <!-- navbar toggler end -->
+                                <div class="collapse navbar-collapse bg-dark-light-blue" id="navbarSupportedContent1">
+                                    <!-- header nav start -->
+                                    <ul class="nav navbar-nav topnav">                                       
+                                        <li class="active nav-home">
+                                            <a href="{% url 'home' %}">Home</a>                                            
+                                        </li>
+                                        {% if user.is_authenticated %} 
+                                            {% if user.is_superuser %}                                       
+                                                <li class="nav-home">
+                                                                                   
+                                                </li> 
+                                            {% else %}
+                                            {% endif %}
+                                        {% endif %}
+                                        <li class="nav-home">
+                                            <a href="#">Product</a>                                            
+                                        </li> 
+                                            
+                                        <li class="nav-home">
+                                            <a href="#">About us</a>                                            
+                                        </li>                         
+                                        <li class="nav-home">
+                                            <a href="{% url 'contact' %}">Contact us</a>                                            
+                                        </li> 
+                                      
+                                    </ul>
+                                    <!-- header nav end -->
+                                </div>
+                            </nav>
+                            <!-- header navbar end -->
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-6 d-flex justify-content-end align-items-center sm-no-padding-left">
+                            <!-- header icon start -->
+                            <div class="input-search-1">                           
+                               
+                                <!-- user icon start -->
+                                <div class="display-inline-block users">
+                                    <div class="user padding-tb">
+                                        <div class="margin-left-10px sm-margin-left-5px">
+                                            <a href="javascript:void(0)" class="middle"><i class="ti-user"></i></a>
+                                            <!-- user icon attribute start -->
+                                            <div class="user-drop-down">
+                                                {% if user.is_authenticated %}                                                                                               
+                                                   
+                                                {% else %}
+                                                   
+                                                {% endif %}
+                                            </div>
+                                            <!-- user icon attribute end -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- user icon end -->
+                            </div>
+                            <!-- header icon end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header section end -->
+        <!-- slider section start -->
+        <section class="home-slider">
+            <div class="swiper-container" id="home-slider">
+                <div class="swiper-wrapper">
+                    <!-- slider 1 start -->
+                    <div class="swiper-slide sliderimg slider-position cover-background" style="background-image:url('{% static "image/libazz-fashion-sliderimage1.jpg" %}');">
+                        <div class="slidertext slider-img-2">
+                            <div class="slider-first-heading animated slideInUp text-black title-greatersmall font-weight-600 lg-title-min-medium md-title-med-more2 sm-title-mdmore">Welcome to our</div>
+                            <h1 class="animated slideInLeft text-tometo font-weight-600 title-extra-large-3 lg-title-extra-large-2 md-title-extra-large-1 ">ELECTRONICS PRODUCT REVIEW SYSTEM</h1>
+                            <p class="sm-text-large">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            <div class="animated slideInDown"><a href="#" class="btn btn-style">View Now</a></div>
+                        </div>
+                    </div>
+                    <!-- slider 1 end -->                   
+                </div>                
+            </div>
+        </section>
+        <!-- slider section end -->
+        <!-- category banner section start -->
+        <section class="padding-80px-tb category-banner-offer">
+            <div class="container">               
+                <h3>Our Product</h3>
+                <hr>             
+                <div class="row">
+                    <!-- banner 1 start -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12 sm-margin-bottom-20px">
+                        <!-- banner 1 image start -->
+                        <div class="section-product">
+                            <a href="#"><img src="{% static 'image/sound.jpg' %}" alt="product1" class="img-fluid w-100"></a>
+                            <div class="overlay"></div>
+                        </div>
+                        <!-- banner 2 image end -->
+                        <div class="product text-center">
+                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Music Player</h6>
+                            <div class="category-name"></div>
+                            <a href="#" class="btn btn-small">View</a>
+                        </div>
+                    </div>
+                    <!-- banner 1 end -->
+                    <!-- banner 2 start -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12 sm-margin-bottom-20px">
+                        <!-- banner 2 image start -->
+                        <div class="section-product">
+                            <a href="#"><img src="{% static 'image/phones.jpg' %}" alt="product2" class="img-fluid w-100"></a>
+                            <div class="overlay"></div>
+                        </div>
+                        <!-- banner 2 image end -->
+                        <div class="product text-center">
+                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Phones Product</h6>
+                            <div class="category-name"></div>
+                            <a href="#" class="btn btn-small">View</a>
+                        </div>
+                    </div>
+                    <!-- banner 2 end -->
+                    <!-- banner 3 start -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-12">
+                        <!-- banner 3 image start -->
+                        <div class="section-product">
+                            <a href="#"><img src="{% static 'image/computer.jpg' %}" alt="product3" class="img-fluid w-100"></a>
+                            <div class="overlay"></div>
+                        </div>
+                        <!-- banner 3 image end -->
+                        <div class="product text-center">
+                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Computer Product</h6>
+                            <div class="category-name"></div>
+                            <a href="#" class="btn btn-small">View</a>
+                        </div>
+                    </div>
+                    <!-- banner 3 end -->
+                </div>
+            </div>
+        </section>
+        <!-- category banner section end -->   
+      
+        <footer class="bg-tometo padding-top-10px padding-bottom-10px">
+            <div class="container">
+                <div class="row">
+                    <!-- footer copyright texts starts -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                        <div class="copyright text-white justify-content-center">Copyright <i class="far fa-copyright"></i> 2023 All Rights Reserved</div>
+                    </div>
+                    <!-- footer copyright texts ends -->                   
+                </div>
+            </div>
+        </footer>
+        <!-- copy-right-section end -->
+        <!-- footer section end -->
+        <!-- javascript/jquery files -->
+        <!-- jquery -->
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <!-- instagramFeed -->
+        <script src="{% static 'js/jquery.instagramFeed.min.js' %}"></script>
+        <!-- popper js -->
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <!-- bootstrap -->
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- aos -->
+        <script src="{% static 'js/aos.js' %}"></script>
+        <!-- swiper -->
+        <script src="{% static 'js/swiper.min.js' %}"></script>
+        <!-- masonary -->
+        <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+        <!-- owl carousal -->
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <!-- product-zoom -->
+        <script src="{% static 'js/jquery.zoom.js' %}"></script>
+        <!-- custom -->
+        <script src="{% static 'js/custom.js' %}"></script>
+    </body>
+</html>

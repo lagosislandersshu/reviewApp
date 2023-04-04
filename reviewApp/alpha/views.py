@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'alpha/home.html')
 
 def contact(request):
     if request.method == 'POST':
@@ -28,5 +28,5 @@ def contact(request):
         
     form = ContactForm()
         
-    return render(request, "contact.html", {'form':form})
+    return render(request, "alpha/contact.html", {'form':form})
 

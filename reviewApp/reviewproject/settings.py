@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'user.apps.UserConfig',
+    'users.apps.UsersConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'alpha.apps.AlphaConfig',
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'users'
 ]
 
 MIDDLEWARE = [
@@ -81,12 +82,7 @@ WSGI_APPLICATION = 'reviewproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'productReview',
-        'HOST' : 'localhost',
-        'USERNAME': 'root',
-        'PASSWORD': 'subzero1234',
-        'PORT': '3306',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

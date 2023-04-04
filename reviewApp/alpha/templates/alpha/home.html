@@ -93,9 +93,11 @@
                                             <!-- user icon attribute start -->
                                             <div class="user-drop-down">
                                                 {% if user.is_authenticated %}                                                                                               
-                                                   
+                                                    <a href="{% url 'profile' %}" class="text-black d-block border-bottom-light-gray">Profile</a>
+                                                    <a href="{% url 'logout' %}" class="text-black d-block">Logout</a>
                                                 {% else %}
-                                                   
+                                                    <a href="{% url 'register' %}" class="text-black d-block border-bottom-light-gray">Register</a>
+                                                    <a href="{% url 'login' %}" class="text-black d-block border-bottom-light-gray">Login</a>
                                                 {% endif %}
                                             </div>
                                             <!-- user icon attribute end -->

@@ -1,0 +1,103 @@
+{% extends 'alpha/base.html' %}
+{% block content %}
+    <div class="container-content">
+        <div class="row justify-content-center"> 
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">ADD PRODUCT</h3>
+            </div>              
+            <div class="col-md-6">              
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label>Name of Product</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter Product Name">
+                        </div>
+                        <div class="col">
+                            <label>Brand/Manufacturer</label>
+                            <input type="text" name="brand" class="form-control" placeholder="Enter Brand/Manufacturer">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Average Cost</label>
+                            <input type="text" name="average_cost" class="form-control" placeholder="Enter Average Cost">
+                        </div>
+                        <div class="col">
+                            <label>Category</label>
+                            <select class="form-control" name="category">
+                                <option value="">Select Category</option>
+                                <option value="Music Player">Music Player</option>
+                                <option value="Apple">Phone</option>
+                                <option value="HP">Computer</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="row">                        
+                        <div class="col">
+                            <label>Date Released</label>
+                            <input type="date" name="date_released" class="form-control" >
+                        </div>
+                        <div class="col">
+                            <label>UPload Picture</label>
+                            <input type="file" name="image" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+                            <textarea type="text" name="desc" class="form-control"></textarea>
+                        </div>                        
+                    </div>                                        
+                    <div class="row">                        
+                        <div class="col">
+                            <p></p>
+                            <input type="submit" name="addProduct" class="btn btn-outline-primary" value="Add Product">
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">PRODUCT ITEMS</h3>
+            </div>           
+            <div class="row">              
+                <div class="col-md-12 justify-content-center">
+                    <table class="table table-bordered align-middle mb-0 bg-white text-center">
+                        <thead class="bg-light">
+                            <tr>                                
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>PRODUCT NAME</th>
+                                <th>BRAND</th>
+                                <th>AVERAGE COST</th>
+                                <th>CATEGORY</th>
+                                <th>RELEASE DATE</th>
+                                <th>DESCRIPTION</th>
+                            </tr>
+                        </thead>
+                        {% for p in product %}
+                        <tbody>
+                            <tr>                                
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ p.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>                                
+                                    </div>
+                                </td>                                                   
+                                <td><a href="{% url 'editProduct' p.id %}" class="btn btn-info">Edit</a></td>
+                                <td><a href="{% url 'deleteProduct' p.id %}" class="btn btn-danger">Delete</a></td>
+                                <td>{{ p.name }}</td>                                
+                                <td>{{ p.brand }}</td>
+                                <td>{{ p.average_cost }}</td>
+                                <td>{{ p.category }}</td>
+                                <td>{{ p.date_released }}</td>
+                                <td>{{ p.desc }}</td>               
+                            </tr>
+                        </tbody>                    
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>         
+    </div>             
+{% endblock %}

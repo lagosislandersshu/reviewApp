@@ -59,13 +59,13 @@
                                         {% if user.is_authenticated %} 
                                             {% if user.is_superuser %}                                       
                                                 <li class="nav-home">
-                                                                                   
+                                                    <a href="{% url 'addProduct' %}">Add Product</a>                                            
                                                 </li> 
                                             {% else %}
                                             {% endif %}
                                         {% endif %}
                                         <li class="nav-home">
-                                            <a href="#">Product</a>                                            
+                                            <a href="{% url 'product' %}">Product</a>                                            
                                         </li> 
                                             
                                         <li class="nav-home">
@@ -161,7 +161,7 @@
                         </div>
                         <!-- banner 2 image end -->
                         <div class="product text-center">
-                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Phones Product</h6>
+                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Phones</h6>
                             <div class="category-name"></div>
                             <a href="#" class="btn btn-small">View</a>
                         </div>
@@ -176,7 +176,7 @@
                         </div>
                         <!-- banner 3 image end -->
                         <div class="product text-center">
-                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Computer Product</h6>
+                            <h6 class="font-weight-600 title-medium lg-text-extra-large md-title-mdall" style="color:#e7403a">Computer</h6>
                             <div class="category-name"></div>
                             <a href="#" class="btn btn-small">View</a>
                         </div>

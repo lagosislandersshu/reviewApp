@@ -1,0 +1,101 @@
+
+{% extends 'alpha/base.html' %}
+{% block content %}
+    <div class="container-content">        
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-xl-8 text-center">
+                <img src="{{ prod.image.url }}" alt="" style="width: 200px; height: 200px" class="rounded"/> 
+                <h3 class="mb-4 review-heading">EDIT PRODUCT</h3>
+                
+            </div>              
+            <div class="col-md-8">               
+                <form method = "POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label>Name of Product</label>
+                            <input type="text" name="name" class="form-control" value="{{ prod.name }}">
+                        </div>
+                        <div class="col">
+                            <label>Brand/Manufacturer</label>
+                            <input type="text" name="brand" class="form-control" value="{{ prod.brand }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Average Cost</label>
+                            <input type="text" name="average_cost" class="form-control" value="{{ prod.average_cost }}">
+                        </div>
+                        <div class="col">
+                            <label>Category</label>
+                            <select class="form-control" name="category">
+                                <option value="{{ prod.category }}">{{ prod.category }}</option>
+                                <option value="Android Phone">Android Phone</option>
+                                <option value="Apple Product">Apple Product</option>
+                                <option value="HP Product">HP Product</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="row">                        
+                        <div class="col">
+                            <label>Date Released</label>
+                            <input type="date" name="date_released" class="form-control" value="{{ prod.date_released }}">
+                        </div>                        
+                        <div class="col">
+                            <label>UPload Picture</label>
+                            <input type="file" name="image" class="form-control" value="{{ prod.image }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Description</label>
+                            <textarea type="text" name="desc" class="form-control">{{ prod.desc }}"</textarea>
+                        </div>                        
+                    </div>                                        
+                    <div class="row">                        
+                        <div class="col">
+                            <p></p>
+                            <input type="submit" name="editBtn" class="btn btn-outline-primary" value="Edit Product">
+                        </div>
+                    </div>                    
+                </form>
+            </div>
+            <p></p>
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">PRODUCT ITEM</h3>
+            </div>           
+            <div class="row">              
+                <div class="col-md-12 justify-content-center">
+                    <table class="table table-bordered align-middle mb-0 bg-white text-center">
+                        <thead class="bg-light">
+                            <tr>                                
+                                <th></th>                     
+                                <th>PRODUCT NAME</th>
+                                <th>BRAND</th>
+                                <th>AVERAGE COST</th>
+                                <th>CATEGORY</th>
+                                <th>RELEASE DATE</th>
+                                <th>DESCRIPTION</th>
+                            </tr>
+                        </thead>                        
+                        <tbody>
+                            <tr>                                
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ prod.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>                                
+                                    </div>
+                                </td>                             
+                                <td>{{ prod.name }}</td>                                
+                                <td>{{ prod.brand }}</td>
+                                <td>{{ prod.average_cost }}</td>
+                                <td>{{ prod.category }}</td>
+                                <td>{{ prod.date_released }}</td>
+                                <td>{{ prod.desc }}</td>               
+                            </tr>
+                        </tbody>                
+                    </table>
+                </div>
+            </div>
+        </div> 
+    </div>
+{% endblock %}

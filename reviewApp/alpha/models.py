@@ -16,13 +16,25 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     average_cost = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
-    date_released = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True)
-    timestamp = models.DateTimeField(auto_now_add=False, auto_now=True, blank=True)
+    date_released = models.DateField(auto_now_add=False, auto_now=False, blank=True, null=True)    
     desc = models.CharField(max_length=2000)
     image = models.ImageField(upload_to=filepath, null=True, blank=True)
 
     def __str__(self):
         return self.name
     
+# Review Table...
+class Review(models.Model):
+    author= models.ForeignKey(User, on_delete=models.CASCADE)  
+    name = models.CharField(max_length=100)
+    product_rating = models.IntegerField()
+    review_content = models.CharField(max_length=2000)     
+    created_on = models.DateTimeField(auto_now_add=True)
+      
+ 
+    class Meta:
+        ordering = ['-created_on']
 
+    def __str__(self):
+        return self.name
 

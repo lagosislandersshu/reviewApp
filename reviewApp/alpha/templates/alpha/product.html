@@ -17,46 +17,58 @@
             </div> 
                 
             <div class="row text-center">
-              {% for p in prod %}
-              <div class="col-md-4 mb-4 mb-md-0">
-                <div class="card">
-                  <div class="card-body py-4 mt-2">
-                    <div class="d-flex justify-content-center mb-4">
-                      <img src="{{ p.image.url }}"
-                        class="rounded shadow-1-strong" width="200" height="200" />
-                    </div>
-                    <h5 class="font-weight-bold">{{ p.name }}</h5>
-                    <h6 class="font-weight-bold my-3">{{ p.average_cost }}</h6>
-                    <h6 class="font-weight-bold my-3">{{ p.date_released }}</h6>
-                    <ul class="list-unstyled d-flex justify-content-center">
-                      <li>
-                        <i class="fas fa-star fa-sm text-info"></i>
-                      </li>
-                      <li>
-                        <i class="fas fa-star fa-sm text-info"></i>
-                      </li>
-                      <li>
-                        <i class="fas fa-star fa-sm text-info"></i>
-                      </li>
-                      <li>
-                        <i class="fas fa-star fa-sm text-info"></i>
-                      </li>
-                      <li>
-                        <i class="fas fa-star-half-alt fa-sm text-info"></i>
-                      </li>
-                    </ul>
-                    <p class="mb-2">
-                      <i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat
-                      ad velit ab hic tenetur.
-                    </p>
-                    <a href="#" class="btn btn-outline-primary">View Eviews</a>
-                  </div>
+              {% if prod == 0 %}
+                <div>
+                    Record not Found...
                 </div>
-              </div>
-              {% endfor %}             
-            </div>
+              {% else %}
+                {% for p in prod %}
+                  <div class="col-md-3 mb-4 mb-md-0">
+                    <div class="card">
+                      <div class="card-body py-4 mt-2">
+                        <div class="d-flex justify-content-center mb-4">
+                          <img src="{{ p.image.url }}"
+                            class="rounded shadow-1-strong" width="200" height="200" />
+                        </div>
+                        <h5 class="font-weight-bold">{{ p.name }}</h5>
+                        <h5 class="font-weight-bold my-3">$ {{ p.average_cost }}</h5>
+                        <h6 class="font-weight-bold my-3">{{ p.date_released }}</h6>          
+                        <a href="{% url 'review' p.name %}" class="btn btn-outline-primary">View Review</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}  
+              {% endif %}  
+            </div> 
+        <div class="row justify-content-center mt-2">       
+        <hr><br/> 
+        {% if prod2 == 0 %} 
+        {% else %} 
+        <nav aria-label="...">
+            <ul class="pagination ">
+                {% if prod.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1" class="page-link">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ prod.previous_page_number }}" class="page-link">Previous</a>
+                    </li>
+                {% endif %}              
+              <li class="page-item active" aria-current="page">
+                <a class="page-link">{{ prod.number }} of {{ prod.paginator.num_pages }}</a>
+              </li>
+              {% if prod.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ prod.next_page_number }}">Next</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ prod.paginator.num_pages }}">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>           
           </div>
+          
         </section>               
       </div>
     </div>         

@@ -1,0 +1,154 @@
+{% extends 'alpha/base.html' %}
+{% block content %}
+    <section style="color: #000; background-color: #f3f2f2;">
+        <div class="container py-5">
+            <div class="col-md-12  text-center mt-4">
+                <h3 class="fw-bold mb-4">Our {{ prod.name }} Product</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="card">
+                        <div class="card-body py-4 mt-2">
+                            <div class="d-flex justify-content-center mb-4">
+                                <img src="{{ prod.image.url }}" class="rounded shadow-1-strong" width="450" height="300" />
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="card">
+                        <div class="card-body py-4 mt-2">                            
+                            <h4 class="font-weight-bold">Product Name: {{ prod.name }}</h4>
+                            <hr>
+                            <h5 class="font-weight-bold my-3">Average Cost: $ {{ prod.average_cost }}</h5>
+                            <hr>
+                            <h6 class="font-weight-bold my-3">Date Released: {{ prod.date_released }}</h6>
+                            <hr>
+                            <p class="mb-2">
+                                Description: {{ prod.desc }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--reviews------------------->
+<section id="reviews">    
+    <div class="review-heading">      
+        <h1>Our Customer reviews</h1>
+    </div>  
+        {% if user.is_authenticated and review2 == 0 %} 
+            <a href="{% url 'addReview' prod.name %}" class="btn btn-outline-primary">Add Review</a>       
+        {% elif user.is_authenticated and review2 > 0 %} 
+            <!--  Show Nothing nothing...-->
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-primary">Add Review</a>
+        {% endif %}    
+    <!--reviews-box-container------>
+    <div class="review-box-container"> 
+        {% if review %}            
+        {% for r in review %}       
+        <!--BOX-1-------------->
+        <div class="review-box">
+            <!--top------------------------->
+            <div class="box-top">
+                <!--profile----->
+                <div class="profile">
+                    <!--img---->
+                   
+                        <div class="profile-img">
+                            <img src="{{ r.author.profile.image.url }}" />
+                        </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                        <strong></strong>
+                        <span>{{ r.author }}</span>
+                        <span>Date Reviewd: {{ r.created_on }}</span>
+                    </div>
+                </div>
+                <!--reviews------>
+                <div class="reviews">  
+                   <spam><small>Rating</small> </spam>                 
+                    {% if r.product_rating == 1 %}
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif r.product_rating == 2 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif r.product_rating == 3 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif r.content_rating == 4 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif r.product_rating == 5 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    {% endif %}
+                </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+                <p>{{ r.review_content }}</p>
+            </div>
+             {% if user.is_authenticated %}
+                {% if user.id == r.author.id %}
+                    <div class="client-comment">
+                        <a href="{% url 'editReview' prod.name %}" class="btn btn-outline-success">Edit Review</a>
+                        <a href="{% url 'deleteReview' r.id %}" class="btn btn-outline-danger">Delete Review</a>
+                    </div>
+                {% endif %}       
+             {% endif %}        
+        </div> 
+        {% endfor %}         
+    </div>
+    {% else %}  
+            <div class="alert alert-warning  mt-2">
+                No review on this Product...
+            </div>         
+        {% endif %}    
+    {% if user.is_authenticated and review2 > 0 %} 
+    <div class="row">       
+        <hr><br/>   
+        <nav aria-label="...">
+            <ul class="pagination ">
+                {% if review.has_previous %}
+                    <li class="page-item">
+                        <a href="?page=1" class="page-link">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="?page={{ review.previous_page_number }}" class="page-link">Previous</a>
+                    </li>
+                {% endif %}              
+              <li class="page-item active" aria-current="page">
+                <a class="page-link">{{ review.number }} of {{ review.paginator.num_pages }}</a>
+              </li>
+              {% if review.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ review.next_page_number }}">Next</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ review.paginator.num_pages }}">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+    </div>
+</section>
+{% endblock %}

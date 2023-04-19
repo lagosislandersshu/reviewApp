@@ -84,8 +84,8 @@
                                         <img src="{{ p.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>                                
                                     </div>
                                 </td>                                                   
-                                <td><a href="{% url 'editProduct' p.id %}" class="btn btn-info">Edit</a></td>
-                                <td><a href="{% url 'deleteProduct' p.id %}" class="btn btn-danger">Delete</a></td>
+                                <td><a href="{% url 'editProduct' p.name %}" class="btn btn-info">Edit</a></td>
+                                <td><a href="{% url 'deleteProduct' p.name %}" class="btn btn-danger">Delete</a></td>
                                 <td>{{ p.name }}</td>                                
                                 <td>{{ p.brand }}</td>
                                 <td>{{ p.average_cost }}</td>

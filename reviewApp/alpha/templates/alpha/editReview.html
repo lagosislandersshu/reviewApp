@@ -1,0 +1,54 @@
+{% extends 'alpha/base.html' %}
+{% block content %}
+    <div class="container-content">
+        <div class="row justify-content-center"> 
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">Add Review</h3>
+            </div>              
+            <div class="col-md-6">              
+                <form method="POST">
+                    {% csrf_token %}                    
+                    <div class="row">                        
+                        <div class="col">
+                            <input type="hidden" name="author" class="form-control" value="{{ review.author }}">
+                            <input type="hidden" name="name" class="form-control" value="{{ review.name }}">    
+                            <label>Product Rating</label>
+                            <select class="form-control" name="product_rating" required>
+                                <option value="{{ review.product_rating }}">
+                                    {% if review.product_rating == 1 %}
+                                        Poor
+                                    {% elif review.product_rating == 2 %}
+                                        Fair
+                                    {% elif review.product_rating == 3 %}
+                                        Good
+                                    {% elif review.product_rating == 4 %}
+                                        Very Good
+                                    {% elif review.product_rating == 2 %}
+                                        Excellent
+                                    {% endif %}
+                                </option>
+                                <option value="1">Poor</option>
+                                <option value="2">Fair</option>
+                                <option value="3">Good</option>
+                                <option value="4">Very Good</option>
+                                <option value="5">Excellent</option>
+                            </select> 
+                        </div>
+                    </div>                    
+                    <div class="row">
+                        <div class="col">
+                            <label>Review Text/Content</label>
+                            <textarea type="text" name="review_content" class="form-control">{{ review.review_content }}</textarea>
+                        </div>                        
+                    </div>                                        
+                    <div class="row">                        
+                        <div class="col">
+                            <p></p>
+                            <input type="submit" name="addReview" class="btn btn-outline-primary" value="Add Review ">
+                        </div>
+                    </div>                    
+                </form>
+            </div> 
+        </div>         
+    </div>             
+{% endblock %}

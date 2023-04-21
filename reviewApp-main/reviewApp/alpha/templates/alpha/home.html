@@ -1,0 +1,42 @@
+{% extends 'alpha/base.html' %}
+{% block content %}
+{% load static %}
+    <section class="home-slider">
+        <div class="swiper-container" id="home-slider">
+            <div class="swiper-wrapper">               
+                <div class="swiper-slide sliderimg slider-position cover-background" style="background-image:url('{% static "image/libazz-fashion-sliderimage1.jpg" %}');">
+                    <div class="slidertext">
+                        <div class="slider-first-heading"><h3><strong>Welcome to our</strong></h3></div>
+                        <h1 style="color:#e75da5"><strong>ELECTRONICS PRODUCT REVIEW SYSTEM</strong></h1>
+                        <p class="sm-text-large">Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>                    
+                </div>                               
+            </div>                
+        </div>
+    </section>      
+    <section class="padding-80px-tb category-banner-offer">
+        <div class="container">               
+            <h3><strong>Our Product</strong></h3>
+            <hr>             
+            <div class="row">
+                {% if cat %}
+                    {% for c in cat %}                    
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-12">                       
+                            <div class="section-product">
+                                <a href="#"><img src="{{ c.image.url }}" alt="product" class="img-fluid w-100"></a>
+                                <div class="overlay"></div>
+                            </div>                       
+                            <div class="text-center">
+                                <h6 class="fw-bold" style="color:#e75da5"><strong>{{ c.cat }}</strong></h6>                       
+                                <a href="{% url 'product' c.cat %}" class="btn btn-outline-primary">View Products</a>
+                            </div>
+                        </div>
+                    {% endfor %} 
+                {% else %} 
+                        <div class="alert alert-warning">
+                            Category is Empty.. 
+                        </div>                
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

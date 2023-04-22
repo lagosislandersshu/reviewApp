@@ -30,9 +30,9 @@
                             <label>Category</label>
                             <select class="form-control" name="category">
                                 <option value="{{ prod.category }}">{{ prod.category }}</option>
-                                <option value="Android Phone">Android Phone</option>
-                                <option value="Apple Product">Apple Product</option>
-                                <option value="HP Product">HP Product</option>
+                                {% for c in cat %}                               
+                                    <option value="HP Product">{{ c.cat }}</option>
+                                {% endfor %}
                             </select> 
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <tr>                                
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ prod.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>                                
+                                        <img src="{{ prod.image.url }}" alt="" style="width: 45px; height: 45px" class="rounded"/>                                
                                     </div>
                                 </td>                             
                                 <td>{{ prod.name }}</td>                                

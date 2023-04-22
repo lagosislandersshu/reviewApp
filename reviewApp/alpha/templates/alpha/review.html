@@ -25,7 +25,7 @@
                             <h6 class="font-weight-bold my-3">Date Released: {{ prod.date_released }}</h6>
                             <hr>
                             <p class="mb-2">
-                                Description: {{ prod.desc }}
+                                <spam class="font-weight-bold my-3">Description:</spam> {{ prod.desc|truncatewords:1 }}
                             </p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="name-user">
                         <strong></strong>
                         <span>{{ r.author }}</span>
-                        <span>Date Reviewd: {{ r.created_on }}</span>
+                        <span>Review Date: {{ r.created_on }}</span>
                     </div>
                 </div>
                 <!--reviews------>

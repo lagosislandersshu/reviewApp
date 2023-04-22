@@ -9,24 +9,14 @@
               <div class="col-md-10 col-xl-8 text-center">
                 <h3 class="fw-bold mb-4">PRODUCT ITEM</h3>
                 <p class="mb-4 pb-2 mb-md-5 pb-md-0">
-                  Our product says it ALL
-                  <p class="mb-4 pb-2 mb-md-5 pb-md-0">
-                    Buy ANY items at minimum cost of £500 and get 20% discount at next purchase.
-                    <p class="mb-4 pb-2 mb-md-5 pb-md-0">
-                      Terms and condition appy   
-                       
-                    </p>
-                  </p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
+                  numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
+                  quisquam eum porro a pariatur veniam.
                 </p>
               </div>
-            </div> 
-                
+            </div>                
             <div class="row text-center">
-              {% if prod == 0 %}
-                <div>
-                    Record not Found...
-                </div>
-              {% else %}
+              {% if prod %}                
                 {% for p in prod %}
                   <div class="col-md-3 mb-4 mb-md-0">
                     <div class="card">
@@ -42,40 +32,42 @@
                       </div>
                     </div>
                   </div>
-                {% endfor %}  
+                {% endfor %}
+                
+              {% else %}
+                  <div class="alert alert-warning">
+                      Product Query Empty...
+                  </div>
               {% endif %}  
             </div> 
-        <div class="row justify-content-center mt-2">       
-        <hr><br/> 
-        {% if prod2 == 0 %} 
-        {% else %} 
-        <nav aria-label="...">
-            <ul class="pagination ">
-                {% if prod.has_previous %}
+          <div class="row justify-content-center mt-2">       
+            <hr><br/> 
+            {% if prod2 == 0 %} 
+            {% else %} 
+              <nav aria-label="...">
+                <ul class="pagination ">
+                  {% if prod.has_previous %}
                     <li class="page-item">
-                        <a href="?page=1" class="page-link">First</a>
+                      <a href="?page=1" class="page-link">First</a>
                     </li>
                     <li class="page-item">
-                        <a href="?page={{ prod.previous_page_number }}" class="page-link">Previous</a>
+                      <a href="?page={{ prod.previous_page_number }}" class="page-link">Previous</a>
                     </li>
-                {% endif %}              
-              <li class="page-item active" aria-current="page">
-                <a class="page-link">{{ prod.number }} of {{ prod.paginator.num_pages }}</a>
-              </li>
-              {% if prod.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{ prod.next_page_number }}">Next</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ prod.paginator.num_pages }}">Last</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-        {% endif %}
-    </div>           
-          </div>
-          
-        </section>               
-      </div>
-    </div>         
-  </div>             
+                  {% endif %}              
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link">{{ prod.number }} of {{ prod.paginator.num_pages }}</a>
+                  </li>
+                  {% if prod.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ prod.next_page_number }}">Next</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ prod.paginator.num_pages }}">Last</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            {% endif %}
+          </div>             
+    </section>               
+  </div>
+</div>     
 {% endblock %}

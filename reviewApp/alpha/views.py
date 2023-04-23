@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .forms import ContactForm, ReviewForm
 from django.core.mail import send_mail, BadHeaderError
-from .models import Product, Review, Category
+from .models import Product, Review, Category, Cart
 from django.core.paginator import Paginator
 from django.contrib import messages
 import os
@@ -93,8 +94,7 @@ def editProduct(request, pk):
 
 
 @login_required
-def deleteProduct(request, pk):
-    cat = Category.objects.all() 
+def deleteProduct(request, pk):    
     prod = Product.objects.get(name=pk)
     if len(prod.image) > 0:
         os.remove(prod.image.path)
@@ -150,6 +150,57 @@ def deleteReview(request, pk):
     prod.delete()
     messages.success(request, "Review delete was Successful")
     return redirect('review', prod.name)
+
+def addcart(request): 
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            product_id = request.POST.get('product_id')
+            product_check = Product.objects.get(id=product_id)
+            if(product_check):
+                if(Cart.objects.filter(user=request.user.id, product_id=product_id)):
+                    return JsonResponse({'status': "Product Alrady Added"})
+                else:
+                    product_qty = int(request.POST.get('product_qty'))
+                    if(product_check.product_qty >= product_qty):
+                        Cart.objects.create(user=request.user, product_id=product_id, product_qty=product_qty)
+                        return JsonResponse({'status': "Product Added to Cart"})
+                    else:
+                        return JsonResponse({'status': "Only"+ str(product_check.product_qty) + "Quantity Available"})
+            else:
+                return JsonResponse({'status': "No such product Found"})
+        else:
+            return JsonResponse({'status': "Login to continue"})
+     
+    return render(request, 'alpha/addcart.html')
+
+def viewcart(request): 
+    cart = Cart.objects.filter(user=request.user) 
+    cat = Category.objects.all()   
+     
+    return render(request, 'alpha/viewcart.html', {'cart':cart, 'cat':cat})
+
+def updatecart(request): 
+    if request.method == 'POST':
+        prod_id = int(request.POST.get('product_id'))
+        if(Cart.objects.filter(user=request.user, product_id=prod_id)):
+            prod_qty = int(request.POST.get('product_qty'))
+            cart=Cart.objects.get(product_id=prod_id, user=request.user)  
+            cart.product_qty = prod_qty         
+            cart.save()
+            return JsonResponse({'status': "Update Successful"}) 
+    return redirect('viewcart') 
+
+def deletecart(request, pk):
+    product_id = pk 
+    if(Cart.objects.filter(user=request.user, product_id=product_id)):           
+        cartitem=Cart.objects.get(product_id=product_id, user=request.user)           
+        cartitem.delete()
+        return redirect('viewcart')
+            
+    
+
+
+   
 
 
    

@@ -7,67 +7,85 @@
           <div class="container py-5">
             <div class="row d-flex justify-content-center">
               <div class="col-md-10 col-xl-8 text-center">
-                <h3 class="fw-bold mb-4">PRODUCT ITEM</h3>
-                <p class="mb-4 pb-2 mb-md-5 pb-md-0">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
-                  numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
-                  quisquam eum porro a pariatur veniam.
-                </p>
+                <h3 class="fw-bold mb-4">PRODUCT ITEM</h3>                
               </div>
             </div>                
             <div class="row text-center">
-              {% if prod %}                
+              {% if prod2 > 0 %}                
                 {% for p in prod %}
-                  <div class="col-md-3 mb-4 mb-md-0">
-                    <div class="card">
-                      <div class="card-body py-4 mt-2">
+                  <div class="col-md-4 mb-4 mb-md-0">
+                    <div class="card product_data">
+                      <div class="card-body py-4 mt-2 ">
                         <div class="d-flex justify-content-center mb-4">
                           <img src="{{ p.image.url }}"
-                            class="rounded shadow-1-strong" width="200" height="200" />
+                            class="rounded shadow-1-strong" width="300" height="300" />
                         </div>
                         <h5 class="font-weight-bold">{{ p.name }}</h5>
                         <h5 class="font-weight-bold my-3">$ {{ p.average_cost }}</h5>
-                        <h6 class="font-weight-bold my-3">{{ p.date_released }}</h6>          
-                        <a href="{% url 'review' p.name %}" class="btn btn-outline-primary">View Review</a>
+                        <h6 class="font-weight-bold my-3">{{ p.date_released }}</h6>
+                        <div class="row">
+                          <div class="col">
+                            <a href="{% url 'review' p.name %}" class="btn btn-info btn-sm">Review</a>
+                          </div>
+                          <div class="col">
+                            {% csrf_token %}
+                            <div class="input-group text-center mb-3 btn-sm" style="width:130px;">
+                              <button class="input-group-text decrement-btn">-</button>
+                              <input type="text" name="quantity" class="form-control qty-input text-center btn-sm" value="1">
+                              <button class="input-group-text increment-btn btn-sm">+</button>
+                            </div>
+                          </div>
+                          <div class="col">                           
+                            <input type="hidden" value="{{ p.id }}" class="prod_id">                           
+                            {% if p.product_qty == 0 %}
+                              <h3 class="btn btn-secondary btn-sm">Sold</h3>
+                            {% else %}
+                              <button class="btn btn-success btn-sm addToCartBtn">Add to cart</button>
+                            {% endif %}
+                          </div>
+                        </div>                                           
                       </div>
                     </div>
-                  </div>
-                {% endfor %}
-                
+                  </div>                  
+                {% endfor %} 
+              </div> 
+              <div class="row justify-content-center mt-2">       
+                <div class="col-md-12">
+                  <hr><br/>            
+                  <nav aria-label="...">
+                    <ul class="pagination ">
+                      {% if prod.has_previous %}
+                        <li class="page-item">
+                          <a href="?page=1" class="page-link">First</a>
+                        </li>
+                        <li class="page-item">
+                          <a href="?page={{ prod.previous_page_number }}" class="page-link">Previous</a>
+                        </li>
+                      {% endif %}              
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link">{{ prod.number }} of {{ prod.paginator.num_pages }}</a>
+                      </li>
+                      {% if prod.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ prod.next_page_number }}">Next</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="?page={{ prod.paginator.num_pages }}">Last</a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>         
+                </div>
+              </div>                            
               {% else %}
-                  <div class="alert alert-warning">
-                      Product Query Empty...
+                <div class="row">
+                  <div class="col alert alert-warning">
+                    Product Query Empty...
                   </div>
+                </div>                
               {% endif %}  
-            </div> 
-          <div class="row justify-content-center mt-2">       
-            <hr><br/> 
-            {% if prod2 == 0 %} 
-            {% else %} 
-              <nav aria-label="...">
-                <ul class="pagination ">
-                  {% if prod.has_previous %}
-                    <li class="page-item">
-                      <a href="?page=1" class="page-link">First</a>
-                    </li>
-                    <li class="page-item">
-                      <a href="?page={{ prod.previous_page_number }}" class="page-link">Previous</a>
-                    </li>
-                  {% endif %}              
-                  <li class="page-item active" aria-current="page">
-                    <a class="page-link">{{ prod.number }} of {{ prod.paginator.num_pages }}</a>
-                  </li>
-                  {% if prod.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ prod.next_page_number }}">Next</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="?page={{ prod.paginator.num_pages }}">Last</a>
-                    </li>
-                  {% endif %}
-                </ul>
-              </nav>
-            {% endif %}
+            </div>            
           </div>             
-    </section>               
-  </div>
-</div>     
+        </section> 
+      </div> 
+    </div>             
+  </div>    
 {% endblock %}

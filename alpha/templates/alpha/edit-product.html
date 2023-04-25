@@ -5,64 +5,80 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-xl-8 text-center">
                 <img src="{{ prod.image.url }}" alt="" style="width: 200px; height: 200px" class="rounded"/> 
-                <h3 class="mb-4 review-heading">EDIT PRODUCT</h3>
-                
+                <h3 class="mb-4 review-heading"><strong>EDIT PRODUCT</strong></h3>                
             </div>              
-            <div class="col-md-8">               
-                <form method = "POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col">
-                            <label>Name of Product</label>
-                            <input type="text" name="name" class="form-control" value="{{ prod.name }}">
-                        </div>
-                        <div class="col">
-                            <label>Brand/Manufacturer</label>
-                            <input type="text" name="brand" class="form-control" value="{{ prod.brand }}">
-                        </div>
+            <div class="col-md-8">
+                <div class="card mb-6">
+                    <div class="card-body text-left">
+                        <form method = "POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Name of Product</strong></label>
+                                    <input type="text" name="name" class="form-control" value="{{ prod.name }}">
+                                </div>
+                                <div class="col">
+                                    <label><strong>Brand/Manufacturer</strong></label>
+                                    <input type="text" name="brand" class="form-control" value="{{ prod.brand }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Average Cost</strong></label>
+                                    <input type="text" name="average_cost" class="form-control" value="{{ prod.average_cost }}">
+                                </div>
+                                <div class="col">
+                                    <label><strong>Category</strong></label>
+                                    <select class="form-control" name="category">
+                                        <option value="{{ prod.category }}">{{ prod.category }}</option>
+                                        {% for c in cat %}                               
+                                            <option value="HP Product">{{ c.cat }}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="row">                        
+                                <div class="col">
+                                    <label><strong>Date Released</strong></label>
+                                    <input type="date" name="date_released" class="form-control">
+                                </div>                        
+                                <div class="col">
+                                    <label><strong>Upload Picture</strong></label>
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Description</strong></label>
+                                    <textarea type="text" name="desc" class="form-control">{{ prod.desc }}</textarea>
+                                </div>                        
+                            </div>                                        
+                            <div class="row">                        
+                                <div class="col">
+                                    <p></p>
+                                    <input type="submit" name="editBtn" class="btn btn-outline-primary" value="Edit Product">
+                                </div>
+                            </div>                    
+                        </form>                                                      
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Average Cost</label>
-                            <input type="text" name="average_cost" class="form-control" value="{{ prod.average_cost }}">
-                        </div>
-                        <div class="col">
-                            <label>Category</label>
-                            <select class="form-control" name="category">
-                                <option value="{{ prod.category }}">{{ prod.category }}</option>
-                                {% for c in cat %}                               
-                                    <option value="HP Product">{{ c.cat }}</option>
-                                {% endfor %}
-                            </select> 
-                        </div>
-                    </div>
-                    <div class="row">                        
-                        <div class="col">
-                            <label>Date Released</label>
-                            <input type="date" name="date_released" class="form-control">
-                        </div>                        
-                        <div class="col">
-                            <label>UPload Picture</label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label>Description</label>
-                            <textarea type="text" name="desc" class="form-control">{{ prod.desc }}</textarea>
-                        </div>                        
-                    </div>                                        
-                    <div class="row">                        
-                        <div class="col">
-                            <p></p>
-                            <input type="submit" name="editBtn" class="btn btn-outline-primary" value="Edit Product">
-                        </div>
-                    </div>                    
-                </form>
+                  </div>             
+                
+            </div>
+            <div class="col-md-2">
+                <div class="card mb-6">
+                  <div class="card-body text-center">
+                    <strong>Product Categories</strong>
+                    {% for c in cat %}
+                      <hr>
+                      <a href="{% url 'product' c.cat %}" class="btn">{{ c.cat }}</a> 
+                      <hr>  
+                    {% endfor %}                                                       
+                  </div>
+                </div>
             </div>
             <p></p>
             <div class="col-md-10 col-xl-8 text-center">
-                <h3 class="mb-4">PRODUCT ITEM</h3>
+                <h3 class="mb-4"><strong>PRODUCT ITEM</strong></h3>
             </div>           
             <div class="row">              
                 <div class="col-md-12 justify-content-center">

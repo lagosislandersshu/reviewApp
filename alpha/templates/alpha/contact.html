@@ -3,7 +3,7 @@
     <div class="container-content">
         <div class="row justify-content-center">             
             <div class="col-md-6">
-                <h3>CONTACT US</h3>
+                <h3><strong>CONTACT US</strong></h3>
                 <div class="alert alert-info">
                     We would like to here from you.
                 </div>
@@ -11,25 +11,25 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col">
-                            <label>Name</label>
+                            <label><strong>Name</strong></label>
                             <input type="text" name="fname" class="form-control" placeholder="Enter your Name">
                         </div>                        
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label>Email</label>
+                            <label><strong>Email</strong></label>
                             <input type="email" name="email" class="form-control" placeholder="Enter your Email">
                         </div>
                     </div>
                     <div class="row">                        
                         <div class="col">
-                            <label>Subject</label>
+                            <label><strong>Subject</strong></label>
                             <input type="text" name="lname" class="form-control" placeholder="Enter your Subject">
                         </div>
                     </div>
                     <div class="row">                        
                         <div class="col">
-                            <label>Message</label>
+                            <label><strong>Message</strong></label>
                             <textarea type="text" name="msg" class="form-control"></textarea>
                         </div>
                     </div>                    
@@ -40,6 +40,18 @@
                         </div>
                     </div>                    
                 </form>
+            </div>
+            <div class="col-md-2">
+                <div class="card mb-6">
+                  <div class="card-body text-center">
+                    <strong>Product Categories</strong>
+                    {% for c in cat %}
+                      <hr>
+                      <a href="{% url 'product' c.cat %}" class="btn">{{ c.cat }}</a> 
+                      <hr>  
+                    {% endfor %}                                                       
+                  </div>
+                </div>
             </div>
         </div>         
     </div>         

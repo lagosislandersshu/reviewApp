@@ -5,68 +5,84 @@
             <div class="col-md-10 col-xl-8 text-center">
                 <h3 class="mb-4"><strong>ADD PRODUCT</strong></h3>
             </div>              
-            <div class="col-md-6">              
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col">
-                            <label><strong>Name of Product</strong></label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter Product Name" required>
-                        </div>
-                        <div class="col">
-                            <label><strong>Brand/Manufacturer</strong>></label>
-                            <input type="text" name="brand" class="form-control" placeholder="Enter Brand/Manufacturer" required>
-                        </div>
+            <div class="col-md-6">
+                <div class="card mb-6">
+                    <div class="card-body text-left">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Name of Product</strong></label>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter Product Name" required>
+                                </div>
+                                <div class="col">
+                                    <label><strong>Brand/Manufacturer</strong></label>
+                                    <input type="text" name="brand" class="form-control" placeholder="Enter Brand/Manufacturer" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Average Cost</strong></label>
+                                    <input type="text" name="average_cost" class="form-control" placeholder="Enter Average Cost" required>
+                                </div>
+                                <div class="col">
+                                    <label><strong>Category</strong></label>
+                                    <select class="form-control" name="category" required>
+                                        <option value=""><strong>Select Category</strong></option>
+                                        {% for c in cat %}
+                                            <option value="{{ c.cat }}">{{ c.cat }}</option>
+                                        {% endfor %}
+                                        
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="row">                        
+                                <div class="col">
+                                    <label><strong>Date Released</strong></label>
+                                    <input type="date" name="date_released" class="form-control" required>
+                                </div>
+                                <div class="col">
+                                    <label><strong>UPload Picture</strong></label>
+                                    <input type="file" name="image" class="form-control" required>
+                                </div>
+                                <div class="col">
+                                    <label><strong>Quantity</strong></label>
+                                    <input type="number" name="product_qty" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label><strong>Description</strong></label>
+                                    <textarea type="text" name="desc" class="form-control" required></textarea>
+                                </div>                        
+                            </div>                                        
+                            <div class="row">                        
+                                <div class="col">
+                                    <p></p>
+                                    <input type="submit" name="addProduct" class="btn btn-outline-primary" value="Add Product">
+                                </div>
+                            </div>                    
+                        </form>                                                   
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <label><strong>Average Cost</strong></label>
-                            <input type="text" name="average_cost" class="form-control" placeholder="Enter Average Cost" required>
-                        </div>
-                        <div class="col">
-                            <label><strong>Category</strong></label>
-                            <select class="form-control" name="category" required>
-                                <option value=""><strong>Select Category</strong></option>
-                                {% for c in cat %}
-                                    <option value="{{ c.cat }}">{{ c.cat }}</option>
-                                {% endfor %}
-                                
-                            </select> 
-                        </div>
-                    </div>
-                    <div class="row">                        
-                        <div class="col">
-                            <label><strong>Date Released</strong></label>
-                            <input type="date" name="date_released" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <label><strong>UPload Picture</strong></label>
-                            <input type="file" name="image" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <label><strong>Quantity</strong></label>
-                            <input type="number" name="product_qty" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label><strong>Description</strong></label>
-                            <textarea type="text" name="desc" class="form-control" required></textarea>
-                        </div>                        
-                    </div>                                        
-                    <div class="row">                        
-                        <div class="col">
-                            <p></p>
-                            <input type="submit" name="addProduct" class="btn btn-outline-primary" value="Add Product">
-                        </div>
-                    </div>                    
-                </form>
+                </div>        
             </div>
+            <div class="col-md-2">
+                <div class="card mb-6">
+                    <div class="card-body text-center">
+                        <strong>Product Categories</strong>
+                        {% for c in cat %}
+                            <hr>
+                            <a href="{% url 'product' c.cat %}" class="btn">{{ c.cat }}</a> 
+                            <hr>  
+                        {% endfor %}                                                       
+                    </div>
+                </div>
+            </div>    
             <div class="col-md-10 col-xl-8 text-center">
                 <h3 class="mb-4"><strong>PRODUCT ITEMS</strong></h3>
             </div>           
             <div class="row">              
-                <div class="col-md-12 justify-content-center">
+                <div class="col-md-10 justify-content-center">
                     <table class="table table-bordered align-middle mb-0 bg-white text-center">
                         <thead class="bg-light">
                             <tr>                                
@@ -106,7 +122,7 @@
                         {% else %}
                             <tbody>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="alert alert-warning">
                                             Quary is Empty...
                                         </div>
@@ -115,7 +131,7 @@
                             </tbody>
                         {% endif %}
                     </table>
-                </div>
+                </div>                             
             </div>
         </div>         
     </div>             

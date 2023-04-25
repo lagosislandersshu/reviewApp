@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib import auth
 from .forms import ContactForm, ReviewForm
 from django.core.mail import send_mail, BadHeaderError
 from .models import Product, Review, Category, Cart
@@ -94,7 +95,8 @@ def editProduct(request, pk):
 
 
 @login_required
-def deleteProduct(request, pk):    
+def deleteProduct(request, pk):
+    cat = Category.objects.all() 
     prod = Product.objects.get(name=pk)
     if len(prod.image) > 0:
         os.remove(prod.image.path)
@@ -150,7 +152,6 @@ def deleteReview(request, pk):
     prod.delete()
     messages.success(request, "Review delete was Successful")
     return redirect('review', prod.name)
-
 def addcart(request): 
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -196,7 +197,14 @@ def deletecart(request, pk):
         cartitem=Cart.objects.get(product_id=product_id, user=request.user)           
         cartitem.delete()
         return redirect('viewcart')
-            
+
+def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return redirect('/')
+
+
+
     
 
 

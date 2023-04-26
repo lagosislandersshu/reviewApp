@@ -5,6 +5,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
+from alpha.models import Category
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
@@ -14,6 +15,7 @@ from django.utils.encoding import force_bytes
 
 # Create your views here.
 def register(request):
+    cat = Category.objects.all() 
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -23,15 +25,16 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form':form})
+    return render(request, 'users/register.html', {'form':form, 'cat':cat})
 
 @login_required
 def profile(request):
-   
-    return render(request, 'users/profile.html')
+    cat = Category.objects.all()    
+    return render(request, 'users/profile.html', {'cat':cat})
 
 @login_required
 def editprofile(request):
+    cat = Category.objects.all() 
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -46,11 +49,13 @@ def editprofile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'cat':cat
     }
     return render(request, 'users/editprofile.html', context)
 
 def password_reset_request(request):
+    
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)
 		if password_reset_form.is_valid():

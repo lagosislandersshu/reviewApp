@@ -1,4 +1,5 @@
 {% extends 'alpha/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="container-content">
         <div class="row justify-content-center">             
@@ -11,28 +12,9 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col">
-                            <label><strong>Name</strong></label>
-                            <input type="text" name="fname" class="form-control" placeholder="Enter your Name">
+                            {{ form|crispy }}
                         </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label><strong>Email</strong></label>
-                            <input type="email" name="email" class="form-control" placeholder="Enter your Email">
-                        </div>
-                    </div>
-                    <div class="row">                        
-                        <div class="col">
-                            <label><strong>Subject</strong></label>
-                            <input type="text" name="lname" class="form-control" placeholder="Enter your Subject">
-                        </div>
-                    </div>
-                    <div class="row">                        
-                        <div class="col">
-                            <label><strong>Message</strong></label>
-                            <textarea type="text" name="msg" class="form-control"></textarea>
-                        </div>
-                    </div>                    
+                    </div>                                 
                     <div class="row">                        
                         <div class="col">
                             <p></p>

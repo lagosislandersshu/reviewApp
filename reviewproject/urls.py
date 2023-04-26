@@ -26,7 +26,6 @@ urlpatterns = [
     path('profile/', user_view.profile, name='profile'),
     path('editprofile/', user_view.editprofile, name='editprofile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='alpha/home.html'), name='logout'),
     path('', include('alpha.urls')),     
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name='reset_password'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),

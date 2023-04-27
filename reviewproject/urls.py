@@ -19,9 +19,11 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_view
+from alpha import views as contact_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('contact/', contact_views.contact_view, name='contact'),
     path('register/', user_view.register, name='register'),
     path('profile/', user_view.profile, name='profile'),
     path('editprofile/', user_view.editprofile, name='editprofile'),

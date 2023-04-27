@@ -148,6 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+CONTACT_EMAIL = 'babaniyi.o.lawal@student.shu.ac.uk'
+ADMIN_EMAILS = ['benacrez@gmail.com', ]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = '587'
@@ -155,6 +157,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 DEFAULT_FROM_EMAIL = 'Babaniyi.o.lawal@student.shu.ac.uk'
+
+
 
 
 DEFAULT_FILE_STORAGE = 'reviewproject.custom_azure.AzureMediaStorage'

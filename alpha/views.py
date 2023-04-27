@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.http.response import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -19,27 +20,19 @@ def aboutus(request):
     cat = Category.objects.all()    
     return render(request, 'alpha/aboutus.html', {'cat':cat})
 
-def contact(request):
-    cat = Category.objects.all() 
-    if request.method == 'POST':    
+def contact_view(request):
+    cat = Category.objects.all()
+    if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']            
-            body = {
-			'name': form.cleaned_data['name'],			 
-			'email': form.cleaned_data['email_address'],             
-			'message':form.cleaned_data['message'], 
-			}
-            message = "\n".join(body.values())
-            try:
-                send_mail(subject, message, 'testing@example.com', ['testing@example.com'])
-                messages.success(request, f'Thank you for contacting us')                
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return redirect ("contact")
-        
+            form.save()
+            email_name = form.cleaned_data['name']
+            email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
+            email_message = form.cleaned_data['message']
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            return render(request, 'alpha/success.html')
     form = ContactForm()
-        
+    
     return render(request, "alpha/contact.html", {'form':form, 'cat':cat})
 
 # view all product...

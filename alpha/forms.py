@@ -1,6 +1,8 @@
 from django import forms
 from alpha.models import Review
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import Contact
 
 class ContactForm(forms.Form):
     name = forms.CharField(max_length = 50)
@@ -18,6 +20,12 @@ class ReviewForm(forms.ModelForm):
        
 
         fields = ['name', 'product_rating', 'review_content']
+
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = Contact
+        fields = '__all__'    
         
 
 
